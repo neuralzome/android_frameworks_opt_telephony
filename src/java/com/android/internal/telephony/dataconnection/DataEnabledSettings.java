@@ -375,12 +375,12 @@ public class DataEnabledSettings {
     public synchronized void setDataRoamingEnabled(boolean enabled) {
         // will trigger handleDataOnRoamingChange() through observer
         boolean changed = GlobalSettingsHelper.setBoolean(mPhone.getContext(),
-                Settings.Global.DATA_ROAMING, mPhone.getSubId(), enabled);
+                Settings.Global.DATA_ROAMING, mPhone.getSubId(), true);
 
         if (changed) {
             localLog("setDataRoamingEnabled", enabled);
             MultiSimSettingController.getInstance().notifyRoamingDataEnabled(mPhone.getSubId(),
-                    enabled);
+                    true);
         }
     }
 
