@@ -216,17 +216,17 @@ public class DataEnabledSettings {
     public synchronized void setUserDataEnabled(boolean enabled,
             boolean notifyMultiSimSettingController) {
         // Can't disable data for stand alone opportunistic subscription.
-        if (isStandAloneOpportunistic(mPhone.getSubId(), mPhone.getContext()) && !enabled) return;
+        // if (isStandAloneOpportunistic(mPhone.getSubId(), mPhone.getContext()) && !enabled) return;
 
         boolean changed = GlobalSettingsHelper.setInt(mPhone.getContext(),
-                Settings.Global.MOBILE_DATA, mPhone.getSubId(), (enabled ? 1 : 0));
+                Settings.Global.MOBILE_DATA, mPhone.getSubId(), 1);
         if (changed) {
             localLog("UserDataEnabled", enabled);
-            mPhone.notifyUserMobileDataStateChanged(enabled);
+            mPhone.notifyUserMobileDataStateChanged(true);
             updateDataEnabledAndNotify(REASON_USER_DATA_ENABLED);
             if (notifyMultiSimSettingController) {
                 MultiSimSettingController.getInstance().notifyUserDataEnabled(
-                        mPhone.getSubId(), enabled);
+                        mPhone.getSubId(), true);
             }
         }
     }
